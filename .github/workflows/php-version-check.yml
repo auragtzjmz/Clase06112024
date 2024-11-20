@@ -1,0 +1,23 @@
+name: PHP Version Check
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-php-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run PHP container
+        uses: docker://php:latest
+        with:
+          args: php -v
+          
+      - name: Info
+        run: |
+          echo "Nombre: Aura Melina Gutierrez Jimenez"
+          echo "Expediente: 743962"
