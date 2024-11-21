@@ -10,8 +10,8 @@ jobs:
   print_messages:
     runs-on: ubuntu-latest
     container:
-      image: node:18  # Usamos un contenedor con Node.js, pero puedes usar otro contenedor de tu preferencia
-
+      image: php:8.1-cli
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
