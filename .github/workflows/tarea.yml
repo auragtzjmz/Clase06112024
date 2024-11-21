@@ -9,8 +9,13 @@ on:
 jobs:
   print_messages:
     runs-on: ubuntu-latest
+    container:
+      image: node:18  # Usamos un contenedor con Node.js, pero puedes usar otro contenedor de tu preferencia
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Imprimir mensajes para test_1
         if: github.ref == 'refs/heads/test_1'
         run: |
