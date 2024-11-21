@@ -3,21 +3,36 @@ name: PHP Version Check
 on:
   push:
     branches:
-      - main
+      - test_1
+      - test_2
 
 jobs:
-  check-php-version:
+  run-in-container-test_1:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/test_1' 
+    container:
+      image: node:18 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Run PHP container
-        uses: docker://php:latest
-        with:
-          args: php -v
-          
-      - name: Info
+      - name: Run Node.js script for test_1
         run: |
-          echo "Nombre: Aura Melina Gutierrez Jimenez"
-          echo "Expediente: 743962"
+          echo "console.log('Rama 1 – Print 1');" > script.js
+          echo "console.log('Rama 1 – Print 2');" >> script.js
+          echo "console.log('Rama 1 – Print 3');" >> script.js
+          node script.js  # Ejecutar el script de Node.js
+
+  run-in-container-test_2:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/test_2'  
+    container:
+      image: node:18  
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Node.js script for test_2
+        run: |
+          echo "console.log('Rama 2 – Print 1');" > script.js
+          echo "console.log('Rama 2 – Print 2');" > script.js
+          echo "console.log('Rama 2 – Print 3');" > script.js
+          node script.js  # Ejecutar el script de Node.js
